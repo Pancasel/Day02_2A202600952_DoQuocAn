@@ -1,8 +1,6 @@
 # 01 - PROBLEM SCANNING REPORT
 ## CASE: TỰ ĐỘNG NHẬN DIỆN VÀ CHE LOGO KHÔNG PHÙ HỢP TRONG VIDEO
 
-
-
 ## 1. TỔNG QUAN BỐI CẢNH (CONTEXT OVERVIEW)
 Trong các dự án triển khai giải pháp AI vào thực tế, việc xử lý và làm sạch dữ liệu hình ảnh/video đóng vai trò quyết định đến tính an toàn và uy tín của hệ thống. Bài báo cáo này tập trung phân tích quy trình vận hành, phát hiện các "nút thắt cổ chai" (bottlenecks) và xây dựng phương án tối ưu cho bài toán **"Tự động che logo không phù hợp"** trên các luồng dữ liệu video thực tế. 
 
@@ -53,15 +51,10 @@ Dưới đây là danh sách 8 vấn đề cốt lõi được ghi nhận trong 
 
 ---
 
-## 4. THẺ CHI TIẾT VẤN ĐỀ (DETAILED PROBLEM CARDS)
-
+## 4. THẺ CHI TIẾT VẤN ĐỀ 
 ### PROBLEM CARD 1: Gắn nhãn & Sinh dữ liệu thủ công
 * **Actor (Đối tượng thực hiện):** AI Engineer.
-* **Workflow (Luồng công việc hiện tại):** Nhận danh sách các logo mới từ khách hàng $
-ightarrow$ Thu thập dữ liệu thô và sinh thêm ảnh mô phỏng (Data Augmentation) $
-ightarrow$ Gắn nhãn thủ công từng khung hình $
-ightarrow$ Chạy script EDA kiểm tra phân phối $
-ightarrow$ Tiến hành huấn luyện (Train) lại mô hình.
+* **Workflow (Luồng công việc hiện tại):** Nhận danh sách các logo mới từ khách hàng. Thu thập dữ liệu thô và sinh thêm ảnh mô phỏng (Data Augmentation).Gắn nhãn thủ công từng khung hình. Chạy script EDA kiểm tra phân phối. Tiến hành huấn luyện (Train) lại mô hình.
 * **Bottleneck (Nút thắt):** Việc căn chỉnh ngữ cảnh, ánh sáng khi sinh ảnh giả lập tiêu tốn từ 30 - 40 phút cho mỗi logo; hoạt động gắn nhãn thủ công hàng nghìn ảnh chiếm dụng từ 2 - 3 ngày làm việc của kỹ sư cho mỗi đợt phát hành batch dữ liệu mới.
 * **Impact (Hệ quả):** Vòng lặp cập nhật và tối ưu mô hình bị kéo dài, làm chậm tiến độ dự án; các kỹ sư AI bị lãng phí phần lớn thời gian vào các công việc thủ công (tay chân) thay vì tập trung cải tiến thuật toán.
 * **Success Metric (Tiêu chí thành công):** * Giảm tổng thời gian chuẩn bị và xử lý dữ liệu xuống **dưới 1 ngày/đợt** cập nhật.
@@ -90,11 +83,7 @@ ightarrow$ Tiến hành huấn luyện (Train) lại mô hình.
 
 ### PROBLEM CARD 3: Tối ưu hóa FPS cho Live Demo
 * **Actor (Đối tượng thực hiện):** AI Engineer, Khách hàng (Người xem trực tiếp buổi demo).
-* **Workflow (Luồng công việc hiện tại):** Luồng dữ liệu video đi vào hệ thống $
-ightarrow$ Giải mã video (Decode) $
-ightarrow$ Mô hình AI thực hiện dự đoán vị trí logo (Inference) $
-ightarrow$ Tiến hành che/gột bỏ logo (Censorship/Blurring) $
-ightarrow$ Xuất bản và hiển thị video kết quả đầu ra (Live Demo UI).
+* **Workflow (Luồng công việc hiện tại):** Luồng dữ liệu video đi vào hệ thống. Giải mã video (Decode). Mô hình AI thực hiện dự đoán vị trí logo (Inference). Tiến hành che/gột bỏ logo (Censorship/Blurring). Xuất bản và hiển thị video kết quả đầu ra (Live Demo UI).
 * **Bottleneck (Nút thắt):** Cấu hình phần cứng bị giới hạn cố định từ trước, trong khi pipeline xử lý tuần tự hiện tại chưa được tối ưu, dẫn đến hiện tượng nghẽn cổ chai (bottleneck) nghiêm trọng tại khâu xử lý inference của mô hình, làm giảm đáng kể chỉ số FPS.
 * **Impact (Hệ quả):** Trải nghiệm xem Live Demo của khách hàng bị giật lag, trễ hình (latency cao); đối tác đánh giá thấp năng lực triển khai thời gian thực và tính khả thi của giải pháp phần mềm.
 * **Success Metric (Tiêu chí thành công):**
